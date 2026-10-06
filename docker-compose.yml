@@ -8,6 +8,11 @@ services:
       - GENERIC_TIMEZONE=Asia/Novosibirsk
       - TZ=Asia/Novosibirsk
       - N8N_SECURE_COOKIE=false
+      # сценарии читают секреты из окружения ($env.B24_WEBHOOK), а не хранят их в себе — иначе секрет уйдёт с выгрузкой
+      - N8N_BLOCK_ENV_ACCESS_IN_NODE=false
+    env_file:
+      - path: .env          # B24_WEBHOOK=… (в .gitignore)
+        required: false
     volumes:
       - n8n_data:/home/node/.n8n
 
